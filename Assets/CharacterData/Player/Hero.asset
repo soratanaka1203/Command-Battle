@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5661ae774b1db4746a3043ce7eb7b7e4, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
-  charaName: "\u52C7\u8005"
+  characterName: "\u52C7\u8005"
   hp: 100
   attack: 10
   skillMaxUses: 3
   skillCurrentUses: 0
+  playerSprite: {fileID: 0}

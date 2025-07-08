@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\u30B9\u30E9\u30A4\u30E0"
   hp: 20
-  attack: 3
+  attack: 100
+  enemySprite: {fileID: 0}

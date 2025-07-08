@@ -10,24 +10,30 @@ public class Character : MonoBehaviour
 
     private int maxHP;
     private int currentHP;
+    public string characterName {  get { return nameText.text; } }
+    public int attack { get; private set; }
 
-    public void Setup(string name, int maxHp, Sprite sprite)
+    public void Setup(string name, int maxHp, int attack, Sprite sprite)
     {
         nameText.text = name;
         //characterImage.sprite = sprite;
         this.maxHP = maxHp;
         this.currentHP = maxHp;
+        this.attack = attack;
         UpdateHPText();
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         currentHP = Mathf.Max(0, currentHP - damage);
         UpdateHPText();
+        //体力が0以下になったらtrueを返し、倒されたことを知らせる
+        if (currentHP <= 0) return true;
+        else return false;
     }
 
     private void UpdateHPText()
     {
-        hpText.text = currentHP + " / " + maxHP;
+        hpText.text = $"残り体力：{ currentHP} / { maxHP}";
     }
 }
