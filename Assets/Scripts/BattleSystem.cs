@@ -84,7 +84,6 @@ public class BattleSystem : MonoBehaviour
                 remainingReflects--;
                 descriptionText.text = $"スキルの効果発動\n" +
                                        $"敵の攻撃を反射した\n"+
-                                       $"{enemy.characterName}に{enemy.attack}のダメージ"+
                                        $"残り反射回数：{remainingReflects}";
                 yield return new WaitForSeconds(2f);
             }
@@ -102,6 +101,7 @@ public class BattleSystem : MonoBehaviour
                                     "戦闘終了";
                 yield break;
             }
+            descriptionText.text = $"{enemy.characterName}に{enemy.attack}のダメージ";
 
             yield return new WaitForSeconds(2f);
             currentState = BattleState.PlayerTurn;
