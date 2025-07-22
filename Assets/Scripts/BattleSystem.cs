@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEditor.U2D.Animation;
 using TMPro;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class BattleSystem : MonoBehaviour
 {
@@ -18,11 +19,15 @@ public class BattleSystem : MonoBehaviour
 
     private Character player;
     private Character enemy;
+    [SerializeField]private ItemPouchUI itemPouchUI;
+    private List<Item> playerItems;
 
 
     private void Start()
     {
         currentState = BattleState.PlayerTurn;
+        itemPouchUI.Initialize(this);
+        itemPouchUI.gameObject.SetActive(false);
         Init();
         descriptionText.text = "あなたの番です\n" +
                               "行動を選択してください";
@@ -41,8 +46,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             case BattleCommand.Item:
                 //UI表示
-                currentState = BattleState.EnemyTurn;//仮の実装
-                StartCoroutine(EnemyAttack());
+                itemPouchUI.Open(playerItems);
                 break;
         }
     }
@@ -151,6 +155,43 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    public IEnumerator UseItem(Item item)
+    {
+        if (item.quantity <= 0)
+        {
+            descriptionText.text = $"{item.itemName}はもう持っていません。";
+            yield break;
+        }
+
+        // アイテム効果を適用
+        switch (item.effect)
+        {
+            case ItemEffectType.Heal:
+                player.Heal(item.value);
+                descriptionText.text = $"{item.itemName}を使った\n" +
+                                       $"{player.characterName}のHPが{item.value}回復した";
+                break;
+
+            //case ItemEffectType.Cure:
+            //    player.CureStatus(); // 状態異常回復
+            //    descriptionText.text = $"{item.itemName}を使った！\n" +
+            //                           $"状態異常が回復した！";
+            //    break;
+
+                // 他の効果を追加できる
+        }
+
+        item.quantity--;
+
+        yield return new WaitForSeconds(2f);
+
+        // 敵のターンに移行
+        currentState = BattleState.EnemyTurn;
+        descriptionText.text = "相手の番です。";
+        StartCoroutine(EnemyAttack());
+    }
+
+
     private bool RollChance80()
     {
         return Random.value < 0.8f; // 80%の確率でtrue
@@ -170,6 +211,9 @@ public class BattleSystem : MonoBehaviour
         enemyPosition.position = enemySpawnPoint.position;
         enemy = enemyObj.GetComponent<Character>();
         enemy.Setup(enemyData.enemyName, enemyData.hp, enemyData.attack, enemyData.enemySprite);
+
+        //所持アイテムを取得
+        playerItems = playerData.playerItems;
     }
 }
 

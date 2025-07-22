@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5661ae774b1db4746a3043ce7eb7b7e4, type: 3}
-  m_Name: Hero
+  m_Script: {fileID: 11500000, guid: 05b2c226c917ffe4ba5564734fcec950, type: 3}
+  m_Name: HealPotion
   m_EditorClassIdentifier: 
-  characterName: "\u52C7\u8005"
-  hp: 100
-  attack: 10
-  skillMaxUses: 3
-  playerSprite: {fileID: 0}
-  playerItems:
-  - {fileID: 11400000, guid: 0c470c3a83a545042a9967a1c1ae6a65, type: 2}
+  itemName: "\u56DE\u5FA9\u85AC"
+  description: "\u4F53\u529B\u3092\uFF12\uFF10\u56DE\u5FA9\u3059\u308B"
+  quantity: 3
+  effect: 0
+  value: 20

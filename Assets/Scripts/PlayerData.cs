@@ -10,5 +10,5 @@ public class PlayerData : ScriptableObject
     public int attack;
     public int skillMaxUses;
     public Sprite playerSprite;
-
+    public List<Item> playerItems;
 }

@@ -37,6 +37,12 @@ public class Character : MonoBehaviour
         else return false;
     }
 
+    public  void Heal(int value)
+    {
+        currentHP = Mathf.Min(maxHP, currentHP + value);
+        UpdateHPText();
+    }
+
     public bool PlaySkill()
     {
         if (skillCurrentUses >= 0)
