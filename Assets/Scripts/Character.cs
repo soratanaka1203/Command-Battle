@@ -11,15 +11,20 @@ public class Character : MonoBehaviour
     private int maxHP;
     private int currentHP;
     public string characterName {  get { return nameText.text; } }
-    public int attack { get; private set; }
+    public int attack {get; private set; }
+    private int skillMaxUses;
+    public int skillCurrentUses {get; private set;}
+ 
 
-    public void Setup(string name, int maxHp, int attack, Sprite sprite)
+    public void Setup(string name, int maxHp, int attack, Sprite sprite, int skillMaxUses = 0)
     {
         nameText.text = name;
         //characterImage.sprite = sprite;
         this.maxHP = maxHp;
         this.currentHP = maxHp;
-        this.attack = attack;
+        this.attack = attack;  
+        this.skillMaxUses = skillMaxUses;
+        this.skillCurrentUses = skillMaxUses;
         UpdateHPText();
     }
 
@@ -29,6 +34,17 @@ public class Character : MonoBehaviour
         UpdateHPText();
         //体力が0以下になったらtrueを返し、倒されたことを知らせる
         if (currentHP <= 0) return true;
+        else return false;
+    }
+
+    public bool PlaySkill()
+    {
+        if (skillCurrentUses >= 0)
+        {
+            skillCurrentUses--;
+            //スキルを発動出来たらtrueを返す
+            return true;
+        }
         else return false;
     }
 

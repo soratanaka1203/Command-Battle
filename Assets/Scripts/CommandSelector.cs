@@ -7,7 +7,7 @@ public class CommandSelector : MonoBehaviour
     [SerializeField] Button skillButton;
     [SerializeField] Button ItemButton;
 
-    public BattleSystem battleSystem;
+    [SerializeField] BattleSystem battleSystem;
 
     void Start()
     {

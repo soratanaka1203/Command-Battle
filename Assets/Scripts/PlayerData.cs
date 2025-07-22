@@ -9,7 +9,6 @@ public class PlayerData : ScriptableObject
     public int hp;
     public int attack;
     public int skillMaxUses;
-    public int skillCurrentUses;
     public Sprite playerSprite;
 
 }
